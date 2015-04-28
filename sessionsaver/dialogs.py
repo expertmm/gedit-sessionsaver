@@ -88,8 +88,11 @@ class Dialog(object):
         self.__del__()
 
 class SaveSessionDialog(Dialog):
+    def __new__(cls, window, plugin, sessions):
+        return super().__new__(cls)
+
     def __init__(self, window, plugin, sessions):
-        super(SaveSessionDialog, self).__init__('save-session-dialog',
+        super().__init__('save-session-dialog',
                                                 plugin.plugin_info.get_data_dir(),
                                                 window)
         self.plugin = plugin
@@ -117,6 +120,9 @@ class SaveSessionDialog(Dialog):
         self.destroy()
 
 class SessionManagerDialog(Dialog):
+    def __new__(cls, plugin, sessions):
+        return super().__new__(cls)
+
     def __init__(self, plugin, sessions):
         super(SessionManagerDialog, self).__init__('session-manager-dialog',
                                                    plugin.plugin_info.get_data_dir())

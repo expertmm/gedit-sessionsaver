@@ -23,7 +23,7 @@
 from gi.repository import GObject, Gtk, Gedit
 import gettext
 from .store import XMLSessionStore
-from .dialogs import SaveSessionDialog, SessionManagerDialog
+from .dialogs import Dialog, SaveSessionDialog, SessionManagerDialog
 from .gpdefs import *
 
 try:
