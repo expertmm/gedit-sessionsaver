@@ -4,7 +4,7 @@ This is a plugin for [gedit][1], the official text editor of the GNOME desktop e
 
 This plugin is for gedit versions 3 and above. **This plugin is NOT compatible with gedit 2.x**.
 
-If python 3 is the only supported python for my adaptation (I did not port the 2.x version). The Python 3 version requires python3-gobject or python3-gi depending of your distribution.
+Python 3 is the only supported python for my adaptation (I did not port the 2.x version). The Python 3 version requires python3-gobject or python3-gi depending of your distribution.
 
 The translation of the plugin is not available in this repository, but it is always available in the package _gedit-plugins_ from your distribution. If this package is installed on your system, the translation should works.
 
