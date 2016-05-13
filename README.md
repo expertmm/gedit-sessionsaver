@@ -23,8 +23,8 @@ The translation of the plugin is not available in this repository, but it is alw
 2. Link or copy the plugin file and the plugin directory into the gedit plugins directory :
 
         # link
-        $ ln -s gedit-sessionsaver/sessionsaver ~/.local/share/gedit/plugins/
-        $ ln -s gedit-sessionsaver/sessionsaver.plugin ~/.local/share/gedit/plugins/
+        $ ln -s ~/gedit-sessionsaver/sessionsaver ~/.local/share/gedit/plugins/
+        $ ln -s ~/gedit-sessionsaver/sessionsaver.plugin ~/.local/share/gedit/plugins/
         
         # or copy 
         $ cp gedit-sessionsaver/sessionsaver gedit-sessionsaver/sessionsaver.plugin ~/.local/share/gedit/plugins/
