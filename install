@@ -1,0 +1,12 @@
+if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
+if [ ! -d "$HOME/.local/share" ]; then mkdir "$HOME/.local/share"; fi
+if [ ! -d "$HOME/.local/share/gedit" ]; then mkdir "$HOME/.local/share/gedit"; fi
+if [ ! -d "$HOME/.local/share/gedit/plugins" ]; then mkdir "$HOME/.local/share/gedit/plugins"; fi
+if [ -d "$HOME/.local/share/gedit/plugins/sessionsaver" ]; then
+  rm -Rf "$HOME/.local/share/gedit/plugins/sessionsaver"
+fi
+if [ ! -d gedit-sessionsaver/sessionsaver ]; then
+  echo "ERROR: Nothing done since install must be run from the gedit-sessionsaver repository folder where it is located"
+  exit 1
+fi
+cp -r gedit-sessionsaver/sessionsaver gedit-sessionsaver/sessionsaver.plugin ~/.local/share/gedit/plugins/

@@ -50,10 +50,13 @@ ui_string = """
 </ui>
 """
 
+MANAGE_ACCELERATOR = ['<Alt>i']
+SAVE_ACCELERATOR = ['<Alt>n']
+
 class SessionSaverPlugin(GObject.Object, Gedit.WindowActivatable):
     __gtype_name__ = "SessionSaverPlugin"
 
-    window = GObject.property(type=Gedit.Window)
+    app = GObject.Property(type=Gedit.App)
 
     SESSION_MENU_PATH = '/MenuBar/FileMenu/FileOps_2/FileSessionMenu/SessionPluginPlaceHolder'
 
@@ -68,40 +71,34 @@ class SessionSaverPlugin(GObject.Object, Gedit.WindowActivatable):
         self._remove_menu()
 
     def do_update_state(self):
-        self._action_group.get_action("FileSessionSave").set_sensitive(self.window.get_active_document() != None)
+        pass
+        # TODO: fix and reinstate? -- formerly self.window.get_active_document
+        # self._action_group.get_action("FileSessionSave").set_sensitive(self.app.get_active_document() != None)
 
     def _insert_menu(self):
-        ui_manager = self.window.get_ui_manager()
-
-        self._action_group = Gtk.ActionGroup("SessionSaverPluginActions")
-        self._action_group.add_actions(
-            [("FileSession", None, _("Sa_ved sessions"), None, None),
-             ("FileSessionSave", Gtk.STOCK_SAVE_AS,
-              _("_Save current session"), None,
-              _("Save the current document list as a new session"),
-              self.on_save_session_action),
-             ("FileSessionManage", None,
-              _("_Manage saved sessions..."), None,
-              _("Open the saved session manager"),
-              self.on_manage_sessions_action)
-            ])
-        ui_manager.insert_action_group(self._action_group)
-
-        self._ui_id = ui_manager.add_ui_from_string(ui_string)
-
+        # see similar change for new API at gedit-reflow-plugin:
+        # https://github.com/guillaumechereau/gedit-reflow-plugin/commit/f3f8273095cbd5edd91f27dd5ffc9be9d7f8c593
+        # self.app.set_accels_for_action("win.filesessionsave", SAVE_ACCELERATOR)
+        # self.app.set_accels_for_action("win.filesessionmanage", MANAGE_ACCELERATOR)
+        # TODO: _insert_session_menu must be changed similarly
+        _ = lambda s: gettext.dgettext('devhelp', s)
+        self.menu_ext = self.extend_menu("tools-section")
+        item = Gio.MenuItem.new(_("Save Session"), "win.filesessionsave")
+        self.menu_ext.prepend_menu_item(item)
+        item = Gio.MenuItem.new(_("Manage Sessions"), "win.filesessionmanage")
+        self.menu_ext.prepend_menu_item(item)
         self._insert_session_menu()
 
-        ui_manager.ensure_update()
-
     def _remove_menu(self):
-        ui_manager = self.window.get_ui_manager()
+        self.app.set_accels_for_action("win.filesessionsave", [])
+        self.app.set_accels_for_action("win.filesessionmanage", [])
+        self.menu_ext = None
 
+        # see similar change for new API at gedit-reflow-plugin:
+        # https://github.com/guillaumechereau/gedit-reflow-plugin/commit/f3f8273095cbd5edd91f27dd5ffc9be9d7f8c593
+
+        # TODO: _remove_session_menu must be changed similarly
         self._remove_session_menu()
-
-        ui_manager.remove_ui(self._ui_id)
-        ui_manager.remove_action_group(self._action_group)
-
-        ui_manager.ensure_update()
 
     def _insert_session_menu(self):
         ui_manager = self.window.get_ui_manager()
