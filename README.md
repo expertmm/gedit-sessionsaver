@@ -1,5 +1,6 @@
 ﻿# gedit session saver plugin
-this fork (by poikilos) is nonworking and not maintained (same applies to original author's project and all other forks of gedit-sessionsaver known to me) due to significant changes in Gedit's API--try <https://github.com/poikilos/Gedit-External-Tools-SaveSession> or <https://github.com/89luca89/Gedit-External-Tools-SaveSession> instead
+This fork (by poikilos) is nonworking and not maintained (same applies to original author's project and all other forks of gedit-sessionsaver known to me) due to significant changes in Gedit's API
+- try <https://github.com/poikilos/Gedit-External-Tools-SaveSession> or <https://github.com/89luca89/Gedit-External-Tools-SaveSession> instead
 
 This is a plugin for [gedit][1], the official text editor of the GNOME desktop environment. It’s a fork of the original gedit session saver plugin that [has been dropped][2] in [gedit 3.7.1][3]. This repository contains the ready-to-use version of this plugin that I fixed in my [gedit-sessionsaver repository][4].
 
